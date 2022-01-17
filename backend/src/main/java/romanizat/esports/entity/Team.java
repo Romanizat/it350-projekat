@@ -1,9 +1,8 @@
 package romanizat.esports.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonGetter;
 
 import java.io.Serializable;
-import java.time.*;
 import java.util.*;
 import javax.persistence.*;
 
@@ -53,5 +52,23 @@ public class Team implements Serializable {
         return Objects.hash(id);
     }
 
+    @JsonGetter
+    public List<Integer> getTournaments() {
+        List<Integer> tournamentIds = new ArrayList<>();
+        if (this.tournaments == null || this.tournaments.isEmpty()) return null;
+        for (Tournament tournament : this.tournaments) {
+            tournamentIds.add(tournament.getId());
+        }
+        return tournamentIds;
+    }
 
+    @JsonGetter
+    public List<Integer> getSponsors() {
+        List<Integer> sponsorIds = new ArrayList<>();
+        if (this.sponsors == null || this.tournaments.isEmpty()) return null;
+        for (Sponsor sponsor : this.sponsors) {
+            sponsorIds.add(sponsor.getId());
+        }
+        return sponsorIds;
+    }
 }

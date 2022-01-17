@@ -57,9 +57,4 @@ public class Game implements Serializable {
         }
         return genreIds;
     }
-
-    @JsonSetter
-    private void setGenres(List<Integer> genreIds) {
-
-    }
 }

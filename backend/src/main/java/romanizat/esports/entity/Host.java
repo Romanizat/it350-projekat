@@ -1,5 +1,6 @@
 package romanizat.esports.entity;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -7,6 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -51,5 +53,13 @@ public class Host implements Serializable {
         return Objects.hash(id);
     }
 
-
+    @JsonGetter
+    public List<Integer> getTournaments() {
+        List<Integer> tournamentIds = new ArrayList<>();
+        if (this.tournaments == null || this.tournaments.isEmpty()) return null;
+        for (Tournament tournament : this.tournaments) {
+            tournamentIds.add(tournament.getId());
+        }
+        return tournamentIds;
+    }
 }

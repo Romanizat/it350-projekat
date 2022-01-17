@@ -1,6 +1,6 @@
 package romanizat.esports.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonGetter;
 
 import java.io.Serializable;
 import java.time.*;
@@ -52,6 +52,26 @@ public class Tournament implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @JsonGetter
+    public List<Integer> getHosts() {
+        List<Integer> hostIds = new ArrayList<>();
+        if (this.hosts == null || this.hosts.isEmpty()) return null;
+        for (Host host : this.hosts) {
+            hostIds.add(host.getId());
+        }
+        return hostIds;
+    }
+
+    @JsonGetter
+    public List<Integer> getTeams() {
+        List<Integer> teamIds = new ArrayList<>();
+        if (this.teams == null || this.teams.isEmpty()) return null;
+        for (Team team : this.teams) {
+            teamIds.add(team.getId());
+        }
+        return teamIds;
     }
 
 
